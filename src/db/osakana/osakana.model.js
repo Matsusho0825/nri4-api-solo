@@ -38,4 +38,10 @@ module.exports = {
         .where('id', id)
         .del()
     },
+
+    edit(id,key,value){
+        return knex(OSAKANA_TABLE)
+        .where('id', id)
+        .update(key,value)
+    }
 }
