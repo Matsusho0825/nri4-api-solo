@@ -20,7 +20,6 @@ module.exports = {
   },
 
   register(fish){
-    console.log("insert")
     return knex(OSAKANA_TABLE).insert(
         [
           {
@@ -32,5 +31,11 @@ module.exports = {
         ],
         ["id"]
       );
+    },
+
+    delete(id){
+     return knex(OSAKANA_TABLE)
+        .where('id', id)
+        .del()
     },
 }
