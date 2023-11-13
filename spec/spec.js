@@ -45,9 +45,9 @@ describe("The express server", () => {
           });
         });
       });
-      describe("DELETE /api/fishes - delete fishes", () => {
+      describe("DELETE /api/fishes/:id - delete fishes", () => {
         it("should delete all fishes", async () => {
-          await request.delete("/api/fishes").send({"id": 3});
+          await request.delete("/api/fishes/3");
           console.log("Delete Complete");
         });
         it("should return fishes", async () => {
@@ -59,4 +59,18 @@ describe("The express server", () => {
             JSON.parse(res.text).should.deep.equal(expected);
           });
         });
-});
+
+        describe("PATCH /api/fishes/:idOrName - change selected fish by id", () => {
+            it("should change fish by id", async () => {
+              await request.patch("/api/fishes/2").send({ "key": "habitat","value": "china" });
+            });
+            it("should return changed fish by id", async () => {
+                const res = await request.get("/api/fishes");
+                const expected = [
+                    {"id": 1, "name": "sake", "habitat": "japan", "cost_price": "100.00"},
+                    {"id": 2, "name": "hokke", "habitat": "china", "cost_price": "200.00"},
+                  ];
+                JSON.parse(res.text).should.deep.equal(expected);
+            });
+          });
+        });
