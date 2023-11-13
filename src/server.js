@@ -15,6 +15,9 @@ const setupExpressServer = () => {
   app.get("/api/fishes", osakanaController.index);
 
   app.post("/api/fishes", osakanaController.register);
+
+  app.delete("/api/fishes", osakanaController.delete);
+  
   return app;
 }
 

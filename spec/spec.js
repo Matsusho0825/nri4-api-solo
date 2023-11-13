@@ -45,4 +45,18 @@ describe("The express server", () => {
           });
         });
       });
-   })
+      describe("DELETE /api/fishes - delete fishes", () => {
+        it("should delete all fishes", async () => {
+          await request.delete("/api/fishes").send({"id": 3});
+          console.log("Delete Complete");
+        });
+        it("should return fishes", async () => {
+            const res = await request.get("/api/fishes");
+            const expected = [
+                {"id": 1, "name": "sake", "habitat": "japan", "cost_price": "100.00"},
+                {"id": 2, "name": "hokke", "habitat": "finland", "cost_price": "200.00"},
+              ];
+            JSON.parse(res.text).should.deep.equal(expected);
+          });
+        });
+});
