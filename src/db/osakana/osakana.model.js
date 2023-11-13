@@ -9,15 +9,28 @@ module.exports = {
    * @param {number} limit - The max number of customers to return.
    * @return {Promise<Array>} A promise that resolves to an array of customers.
    */
-  getAll(limit = 100) {
-    return knex
+  getAll(){
+    return knex(OSAKANA_TABLE)
       .select({
         id: "id",
         name: "name",
         habitat: "habitat",
         cost_price: "cost_price",
       })
-      .from(OSAKANA_TABLE)
-      .limit(limit);
   },
+
+  register(fish){
+    console.log("insert")
+    return knex(OSAKANA_TABLE).insert(
+        [
+          {
+            id: fish.id,
+            name: fish.name,
+            habitat: fish.habitat,
+            cost_price: fish.cost_price,
+          },
+        ],
+        ["id"]
+      );
+    },
 }
