@@ -29,17 +29,14 @@ module.exports = {
   },
 
   register(fish) {
-    return knex(OSAKANA_TABLE).insert(
-      [
-        {
-          id: fish.id,
-          name: fish.name,
-          habitat: fish.habitat,
-          cost_price: fish.cost_price,
-        },
-      ],
-      ["id"]
-    );
+    return knex(OSAKANA_TABLE).insert([
+      {
+        id: fish.id,
+        name: fish.name,
+        habitat: fish.habitat,
+        cost_price: fish.cost_price,
+      },
+    ]);
   },
 
   delete(id) {
